@@ -16,6 +16,10 @@
     "tests/model/password.test.ts": {
       "sha256": "d03c186ea9d1c6c480afec93906245318a1a10e0aec0c2875d2816ee9043ae44",
       "lockedAt": "2026-11-24T17:01:53.763Z"
+    },
+    "tests/model/user.test.ts": {
+      "sha256": "ca956e01fc256345c945c5e4964cd538d6e22f8e873d9c7a2f38b3c0de245de4",
+      "lockedAt": "2026-11-24T18:02:15.225Z"
     }
   }
 }
