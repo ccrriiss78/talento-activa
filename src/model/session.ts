@@ -57,5 +57,10 @@ export function createSessionModel(db: Db, options: SessionOptions = {}) {
       }
       return { actor, renewed: false, expiresAt: row.expires_at };
     },
+
+    /** Borra la sesión asociada al token; idempotente. */
+    async destroy(token: string): Promise<void> {
+      await db.query(`delete from "Session" where token_sha256 = $1`, [sha256Hex(token)]);
+    },
   };
 }

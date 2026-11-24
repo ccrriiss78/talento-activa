@@ -16,6 +16,7 @@
   "dependencies": {
     "@node-rs/argon2": "^2.2.2",
     "@types/pg": "^8.23.1",
+    "hono": "^4.13.21",
     "pg": "^8.23.1"
   }
 }

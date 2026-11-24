@@ -28,6 +28,14 @@
     "tests/controller/cookie.test.ts": {
       "sha256": "02fa6036c4e33ebe6a0dff3336fd30c10d24e00e8c87fcc83fc4ffadffea71de",
       "lockedAt": "2026-11-24T20:02:26.796Z"
+    },
+    "tests/controller/auth-login.test.ts": {
+      "sha256": "fbf794c5cb0e95b4282cbd80f901db2023321524a23fd8f337a6d845f3f53246",
+      "lockedAt": "2026-11-24T21:01:56.347Z"
+    },
+    "tests/model/session-destroy.test.ts": {
+      "sha256": "6053416a59ee713fb4845803fbd9fd002de391713ff6878f971b1270a10547de",
+      "lockedAt": "2026-11-24T21:01:56.347Z"
     }
   }
 }
