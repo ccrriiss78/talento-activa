@@ -71,7 +71,7 @@ En cada conexión, de forma autónoma:
 > Orden por dependencias. El Desarrollador coge la primera `[ ]` no terminada.
 
 ### Bootstrap
-- [ ] **T00 · Andamiaje del proyecto:** `package.json` (TS), runner de tests
+- [x] **T00 · Andamiaje del proyecto:** `package.json` (TS), runner de tests
   (vitest), `tsconfig`, estructura de carpetas MVC (`src/model`, `src/controller`,
   `src/view`, `tests/`), scripts `test`/`build`. Primer test trivial en verde.
 - [ ] **T01 · Cliente de datos:** conexión a Supabase/Postgres desde el backend
