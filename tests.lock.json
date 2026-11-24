@@ -12,6 +12,10 @@
     "tests/model/audit.test.ts": {
       "sha256": "4b89a0bdff60bdff252779e118fb76bb049981e88f4bdadd045a420eac451a66",
       "lockedAt": "2026-11-24T16:02:16.248Z"
+    },
+    "tests/model/password.test.ts": {
+      "sha256": "d03c186ea9d1c6c480afec93906245318a1a10e0aec0c2875d2816ee9043ae44",
+      "lockedAt": "2026-11-24T17:01:53.763Z"
     }
   }
 }
