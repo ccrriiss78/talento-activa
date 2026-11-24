@@ -74,7 +74,7 @@ En cada conexión, de forma autónoma:
 - [x] **T00 · Andamiaje del proyecto:** `package.json` (TS), runner de tests
   (vitest), `tsconfig`, estructura de carpetas MVC (`src/model`, `src/controller`,
   `src/view`, `tests/`), scripts `test`/`build`. Primer test trivial en verde.
-- [ ] **T01 · Cliente de datos:** conexión a Supabase/Postgres desde el backend
+- [x] **T01 · Cliente de datos:** conexión a Supabase/Postgres desde el backend
   (service role / conexión directa). Test de conectividad/consulta básica.
 - [ ] **T02 · Capa de auditoría:** helper que escribe en `Audit_log` desde la capa
   de aplicación (nunca hash ni token). Test de inserción y de exclusiones.

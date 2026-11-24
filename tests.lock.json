@@ -4,6 +4,10 @@
     "tests/andamiaje.test.ts": {
       "sha256": "4b5071f53fe0d1abd6d9add55488cb81e946c188a9686aa5509eb52c32cca9d0",
       "lockedAt": "2026-11-24T14:39:47.184Z"
+    },
+    "tests/model/db.test.ts": {
+      "sha256": "72500b4524141fc540d3c101f31c0fe41bbb81424c818beaf6d3ea1b25043010",
+      "lockedAt": "2026-11-24T15:02:20.526Z"
     }
   }
 }
