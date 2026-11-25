@@ -40,6 +40,10 @@
     "tests/model/session-audit.test.ts": {
       "sha256": "8d3b197103c95fda5b682834ff504906da5494768c2c2add48ddf122c634a722",
       "lockedAt": "2026-11-25T05:02:34.147Z"
+    },
+    "tests/model/user-public.test.ts": {
+      "sha256": "63380a401ec57906e3fb795649b7169b62aeabd2f90755e522837f159b9e53b9",
+      "lockedAt": "2026-11-25T06:02:14.295Z"
     }
   }
 }

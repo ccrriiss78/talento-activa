@@ -1,5 +1,6 @@
 import type { Db } from './db';
-import type { Rol } from './audit';
+import type { Actor, Rol } from './actor';
+import type { AuditEntry } from './audit';
 import { hashPassword, DatosNoValidosError } from './password';
 
 export interface UserPublic {
@@ -18,13 +19,12 @@ export interface NuevoUsuario {
   rol: Rol;
 }
 interface AuditLike {
-  record(entry: {
-    actor: { id: string; rol: Rol } | null;
-    tabla: string;
-    idRegistro: string | null;
-    operacion: 'INSERT' | 'UPDATE' | 'DELETE';
-    datosNuevos?: unknown;
-  }): Promise<void>;
+  record(entry: AuditEntry): Promise<void>;
+}
+
+/** Proyección pública de un usuario (nunca incluye password_hash). */
+export function toPublic(u: UserPublic): UserPublic {
+  return { id: u.id, email: u.email, rol: u.rol, email_verified: u.email_verified, created_at: u.created_at };
 }
 
 export class EmailYaRegistradoError extends Error {
@@ -41,7 +41,7 @@ const COLUMNAS_PUBLICAS = 'id, email, rol, email_verified, created_at';
 export function createUserModel(db: Db, audit: AuditLike) {
   return {
     /** Alta por invitación del admin: nace con email_verified=false. */
-    async createUser(actor: { id: string; rol: Rol }, input: NuevoUsuario): Promise<UserPublic> {
+    async createUser(actor: Actor, input: NuevoUsuario): Promise<UserPublic> {
       if (!ROLES.includes(input.rol)) throw new DatosNoValidosError();
       if (!EMAIL_RE.test(input.email)) throw new DatosNoValidosError();
       const passwordHash = await hashPassword(input.password);

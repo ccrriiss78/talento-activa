@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import { getCookie } from 'hono/cookie';
-import type { UserConHash, UserPublic } from '../model/user';
+import { toPublic, type UserConHash } from '../model/user';
 import { hashPassword, verifyPassword } from '../model/password';
 import { SESSION_COOKIE_NAME, buildSessionCookie, type CookieOptions } from './cookie';
 
@@ -14,10 +14,6 @@ export interface AuthDeps {
 }
 
 const ERROR_CREDENCIALES = { error: 'Credenciales no válidas' };
-
-function proyeccionPublica(u: UserPublic): UserPublic {
-  return { id: u.id, email: u.email, rol: u.rol, email_verified: u.email_verified, created_at: u.created_at };
-}
 
 export function createAuthRoutes(deps: AuthDeps) {
   const app = new Hono();
@@ -37,7 +33,7 @@ export function createAuthRoutes(deps: AuthDeps) {
     if (previa) await deps.sessions.destroy(previa);
     const { token, expiresAt } = await deps.sessions.create(user.id);
     c.header('Set-Cookie', buildSessionCookie(token, expiresAt, deps.cookie));
-    return c.json(proyeccionPublica(user));
+    return c.json(toPublic(user));
   });
 
   return app;

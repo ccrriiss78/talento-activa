@@ -1,6 +1,7 @@
 import { createHash, randomBytes } from 'node:crypto';
 import type { Db } from './db';
-import type { Actor, AuditEntry, Rol } from './audit';
+import type { Actor, Rol } from './actor';
+import type { AuditEntry } from './audit';
 
 export const SESSION_DAYS = 30;
 export const RENEW_THRESHOLD_DAYS = 15;

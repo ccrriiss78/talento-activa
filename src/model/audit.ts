@@ -1,10 +1,6 @@
 import type { Db } from './db';
 
-export type Rol = 'ADMIN' | 'SOCIO' | 'ALUMNO';
-export interface Actor {
-  id: string;
-  rol: Rol;
-}
+import type { Rol } from './actor';
 
 export type Operacion = 'INSERT' | 'UPDATE' | 'DELETE';
 const OPERACIONES: readonly string[] = ['INSERT', 'UPDATE', 'DELETE'];
