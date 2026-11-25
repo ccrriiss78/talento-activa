@@ -1,4 +1,4 @@
-import type { Db } from './db';
+import type { Db, Queryable } from './db';
 import type { Actor, Rol } from './actor';
 import type { AuditEntry } from './audit';
 import { hashPassword, DatosNoValidosError } from './password';
@@ -19,7 +19,7 @@ export interface NuevoUsuario {
   rol: Rol;
 }
 interface AuditLike {
-  record(entry: AuditEntry): Promise<void>;
+  record(entry: AuditEntry, executor?: Queryable): Promise<void>;
 }
 
 /** Proyección pública de un usuario (nunca incluye password_hash). */
@@ -45,25 +45,34 @@ export function createUserModel(db: Db, audit: AuditLike) {
       if (!ROLES.includes(input.rol)) throw new DatosNoValidosError();
       if (!EMAIL_RE.test(input.email)) throw new DatosNoValidosError();
       const passwordHash = await hashPassword(input.password);
-      let rows: UserPublic[];
-      try {
-        rows = await db.query<UserPublic>(
-          `insert into "User" (email, password_hash, rol, email_verified)
-           values ($1, $2, $3, false) returning ${COLUMNAS_PUBLICAS}`,
-          [input.email, passwordHash, input.rol],
-        );
-      } catch (e) {
-        if ((e as { code?: string }).code === '23505') throw new EmailYaRegistradoError();
-        throw e;
-      }
-      const user = rows[0]!;
-      await audit.record({
+      const insertar = async (ex: Queryable, auditar: (u: UserPublic) => Promise<void>) => {
+        let rows: UserPublic[];
+        try {
+          rows = await ex.query<UserPublic>(
+            `insert into "User" (email, password_hash, rol, email_verified)
+             values ($1, $2, $3, false) returning ${COLUMNAS_PUBLICAS}`,
+            [input.email, passwordHash, input.rol],
+          );
+        } catch (e) {
+          if ((e as { code?: string }).code === '23505') throw new EmailYaRegistradoError();
+          throw e;
+        }
+        const u = rows[0]!;
+        await auditar(u);
+        return u;
+      };
+      const entrada = (u: UserPublic): AuditEntry => ({
         actor,
         tabla: 'User',
-        idRegistro: user.id,
+        idRegistro: u.id,
         operacion: 'INSERT',
-        datosNuevos: { email: user.email, rol: user.rol, email_verified: user.email_verified },
+        datosNuevos: { email: u.email, rol: u.rol, email_verified: u.email_verified },
       });
+      // Mutación y auditoría en la misma transacción (atómicas) cuando el cliente la soporta.
+      const user =
+        typeof db.transaction === 'function'
+          ? await db.transaction((tx) => insertar(tx, (u) => audit.record(entrada(u), tx)))
+          : await insertar(db, (u) => audit.record(entrada(u)));
       return user;
     },
 

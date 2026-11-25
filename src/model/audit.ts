@@ -1,4 +1,4 @@
-import type { Db } from './db';
+import type { Db, Queryable } from './db';
 
 import type { Rol } from './actor';
 
@@ -34,11 +34,11 @@ const toJson = (value: unknown): string | null =>
 
 export function createAudit(db: Db) {
   return {
-    async record(entry: AuditEntry): Promise<void> {
+    async record(entry: AuditEntry, executor: Queryable = db): Promise<void> {
       if (!OPERACIONES.includes(entry.operacion)) {
         throw new Error(`Operación de auditoría no válida: ${String(entry.operacion)}`);
       }
-      await db.query(
+      await executor.query(
         `insert into "Audit_log" (id_usuario, tabla, id_registro, operacion, datos_anteriores, datos_nuevos)
          values ($1, $2, $3, $4, $5::jsonb, $6::jsonb)`,
         [

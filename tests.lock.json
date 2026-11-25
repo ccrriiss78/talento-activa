@@ -44,6 +44,14 @@
     "tests/model/user-public.test.ts": {
       "sha256": "63380a401ec57906e3fb795649b7169b62aeabd2f90755e522837f159b9e53b9",
       "lockedAt": "2026-11-25T06:02:14.295Z"
+    },
+    "tests/model/db-transaction.test.ts": {
+      "sha256": "fa3bec5797ed7c88a14d3976cff7b83c4da7d4f29e09a52e73b2705d0373f9b4",
+      "lockedAt": "2026-11-25T07:02:15.023Z"
+    },
+    "tests/model/user-transaction.test.ts": {
+      "sha256": "125b0884d730ddd285027850aa3d0a9673ad1609fca442a4b061fb239dfcefef",
+      "lockedAt": "2026-11-25T07:02:15.023Z"
     }
   }
 }
