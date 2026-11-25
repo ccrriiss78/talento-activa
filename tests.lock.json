@@ -136,6 +136,14 @@
     "tests/controller/projects.test.ts": {
       "sha256": "62b70de8ddc6030266db097953697ccd72b2ca9a1446dbbbd9cf973af66256b7",
       "lockedAt": "2026-11-25T18:03:10.963Z"
+    },
+    "tests/model/taxonomy.test.ts": {
+      "sha256": "776d27829bd4b54bfc77c4a6d6f77d4da551171cc86e3afbcd83b6c18b1fa157",
+      "lockedAt": "2026-11-25T19:03:04.109Z"
+    },
+    "tests/controller/taxonomy.test.ts": {
+      "sha256": "0e8f93cfbe4da1d52010c469c4a5d08b485893ed90f6dcb0832ea3301e996929",
+      "lockedAt": "2026-11-25T19:03:04.109Z"
     }
   }
 }
