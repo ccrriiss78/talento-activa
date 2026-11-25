@@ -56,6 +56,10 @@
     "tests/controller/logout-me.test.ts": {
       "sha256": "16836e0c728147f3c98cbe156add3a25660aeb09669c281ec67cc2ad9e654baa",
       "lockedAt": "2026-11-25T08:02:00.692Z"
+    },
+    "tests/controller/authorization.test.ts": {
+      "sha256": "ba3254f4a7906594e6f3995eda4e87cf943cc58bde9fd63e12d5c7deb224603e",
+      "lockedAt": "2026-11-25T09:02:17.399Z"
     }
   }
 }
