@@ -96,6 +96,14 @@
     "tests/controller/students.test.ts": {
       "sha256": "b864b59c233090ed2a09ea90fa8c43ba14b88a93e5b1d24462b5d597981173f5",
       "lockedAt": "2026-11-25T13:02:37.940Z"
+    },
+    "tests/model/company.test.ts": {
+      "sha256": "0137193b209ca8698b4daa170a8c000ea3fb53d3efea5754a8fe474c53cb6cb1",
+      "lockedAt": "2026-11-25T14:03:00.865Z"
+    },
+    "tests/controller/companies.test.ts": {
+      "sha256": "d39a2acc4e4894549c9f74f8323c17b53ae32cd7ab955a083896772f6fb761fc",
+      "lockedAt": "2026-11-25T14:03:00.866Z"
     }
   }
 }
