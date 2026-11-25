@@ -52,6 +52,10 @@
     "tests/model/user-transaction.test.ts": {
       "sha256": "125b0884d730ddd285027850aa3d0a9673ad1609fca442a4b061fb239dfcefef",
       "lockedAt": "2026-11-25T07:02:15.023Z"
+    },
+    "tests/controller/logout-me.test.ts": {
+      "sha256": "16836e0c728147f3c98cbe156add3a25660aeb09669c281ec67cc2ad9e654baa",
+      "lockedAt": "2026-11-25T08:02:00.692Z"
     }
   }
 }
