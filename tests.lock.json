@@ -112,6 +112,14 @@
     "tests/controller/student-self.test.ts": {
       "sha256": "67a5fe8fa9c1a77a83dd5d59347b7d6b377ad2ab63fe33e75d4f7bbbce61a12a",
       "lockedAt": "2026-11-25T15:03:20.573Z"
+    },
+    "tests/model/student-status.test.ts": {
+      "sha256": "ae930284a9d881b50a51d27b54cce47b98dd22f54eaf58e202aecfabe252e148",
+      "lockedAt": "2026-11-25T16:02:44.236Z"
+    },
+    "tests/controller/student-status.test.ts": {
+      "sha256": "ebd2802aaa7584bef55649b7fdd17a7f34836ddbc66b12c9b1a593d68f7b1d71",
+      "lockedAt": "2026-11-25T16:02:44.236Z"
     }
   }
 }
