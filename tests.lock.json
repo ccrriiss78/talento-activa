@@ -120,6 +120,14 @@
     "tests/controller/student-status.test.ts": {
       "sha256": "ebd2802aaa7584bef55649b7fdd17a7f34836ddbc66b12c9b1a593d68f7b1d71",
       "lockedAt": "2026-11-25T16:02:44.236Z"
+    },
+    "tests/model/student-forget.test.ts": {
+      "sha256": "f967353c4bd6a11654760f01787e02e5481adad340b5fd37a8512089c8bdb5aa",
+      "lockedAt": "2026-11-25T17:03:06.733Z"
+    },
+    "tests/controller/student-forget.test.ts": {
+      "sha256": "c58118c8e3f0268c6e5df0ca4f8e93db668755824a4e9db6a23c44468c08b642",
+      "lockedAt": "2026-11-25T17:03:06.733Z"
     }
   }
 }
