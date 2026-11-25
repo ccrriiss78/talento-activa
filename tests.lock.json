@@ -36,6 +36,10 @@
     "tests/model/session-destroy.test.ts": {
       "sha256": "6053416a59ee713fb4845803fbd9fd002de391713ff6878f971b1270a10547de",
       "lockedAt": "2026-11-24T21:01:56.347Z"
+    },
+    "tests/model/session-audit.test.ts": {
+      "sha256": "8d3b197103c95fda5b682834ff504906da5494768c2c2add48ddf122c634a722",
+      "lockedAt": "2026-11-25T05:02:34.147Z"
     }
   }
 }

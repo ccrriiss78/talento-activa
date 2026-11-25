@@ -13,7 +13,7 @@ const OPERACIONES: readonly string[] = ['INSERT', 'UPDATE', 'DELETE'];
 const CLAVES_PROHIBIDAS = new Set(['password', 'password_hash', 'token', 'token_sha256']);
 
 export interface AuditEntry {
-  actor: Actor | null; // null => lo genera el sistema
+  actor: { id: string; rol?: Rol } | null; // null => lo genera el sistema
   tabla: string;
   idRegistro: string | null;
   operacion: Operacion;
