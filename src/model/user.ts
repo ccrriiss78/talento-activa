@@ -41,7 +41,7 @@ const COLUMNAS_PUBLICAS = 'id, email, rol, email_verified, created_at';
 export function createUserModel(db: Db, audit: AuditLike) {
   return {
     /** Alta por invitación del admin: nace con email_verified=false. */
-    async createUser(actor: Actor, input: NuevoUsuario): Promise<UserPublic> {
+    async createUser(actor: Actor, input: NuevoUsuario, executor?: Queryable): Promise<UserPublic> {
       if (!ROLES.includes(input.rol)) throw new DatosNoValidosError();
       if (!EMAIL_RE.test(input.email)) throw new DatosNoValidosError();
       const passwordHash = await hashPassword(input.password);
@@ -68,7 +68,9 @@ export function createUserModel(db: Db, audit: AuditLike) {
         operacion: 'INSERT',
         datosNuevos: { email: u.email, rol: u.rol, email_verified: u.email_verified },
       });
-      // Mutación y auditoría en la misma transacción (atómicas) cuando el cliente la soporta.
+      // Con ejecutor externo, la mutación va en la transacción del llamador. Si no, en una propia
+      // (atómica con su auditoría) cuando el cliente la soporta.
+      if (executor) return insertar(executor, (u) => audit.record(entrada(u), executor));
       const user =
         typeof db.transaction === 'function'
           ? await db.transaction((tx) => insertar(tx, (u) => audit.record(entrada(u), tx)))

@@ -84,6 +84,18 @@
     "tests/controller/editions.test.ts": {
       "sha256": "92f71b737480b8c7aa11a94d1c581dbaf15c63a48fe65bd6ffa4f2433e4ef03b",
       "lockedAt": "2026-11-25T12:03:46.225Z"
+    },
+    "tests/model/student.test.ts": {
+      "sha256": "b6528d99ffe3613ac170b78e288842dbfc4793d4fb59559790601f42f440f5aa",
+      "lockedAt": "2026-11-25T13:02:37.939Z"
+    },
+    "tests/model/user-executor.test.ts": {
+      "sha256": "16d17e91a1a1ffd3e209d384615758fae3f20ee5d301f3629f9e86ecd161b8c6",
+      "lockedAt": "2026-11-25T13:02:37.940Z"
+    },
+    "tests/controller/students.test.ts": {
+      "sha256": "b864b59c233090ed2a09ea90fa8c43ba14b88a93e5b1d24462b5d597981173f5",
+      "lockedAt": "2026-11-25T13:02:37.940Z"
     }
   }
 }
