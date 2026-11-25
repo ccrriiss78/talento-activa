@@ -64,6 +64,18 @@
     "tests/controller/register.test.ts": {
       "sha256": "7eef9a3cb15e5aa39be805cc8f9406cab6d79b63d7cbd52e49a702fc9bdd9951",
       "lockedAt": "2026-11-25T10:02:11.348Z"
+    },
+    "tests/model/email-verification.test.ts": {
+      "sha256": "951bd973c09a75fe5c35533e52041888c6bc4216e7b4968a626def58d2352801",
+      "lockedAt": "2026-11-25T11:02:46.769Z"
+    },
+    "tests/model/verification-mailer.test.ts": {
+      "sha256": "772e57e85e100dcaec8f71c6d40e878d217d2fdd4857869fa066a913731572be",
+      "lockedAt": "2026-11-25T11:02:46.770Z"
+    },
+    "tests/controller/verify-email.test.ts": {
+      "sha256": "4a7d78fb536e41042b646ce3ab9794753dbd6e0fea7ce8bc62e396e81cc7f41b",
+      "lockedAt": "2026-11-25T11:02:46.770Z"
     }
   }
 }

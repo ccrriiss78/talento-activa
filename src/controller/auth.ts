@@ -28,6 +28,10 @@ export function createAuthRoutes(deps: AuthDeps) {
     const user = await deps.users.findByEmail(body.email);
     const ok = await verifyPassword(body.password, user ? user.password_hash : await HASH_SEÑUELO);
     if (!user || !ok) return c.json(ERROR_CREDENCIALES, 401);
+    // Solo tras acreditar la contraseña: no revela si el email existe a quien no la conoce.
+    if (user.email_verified === false) {
+      return c.json({ error: 'Cuenta pendiente de verificación de email' }, 403);
+    }
 
     const previa = getCookie(c, SESSION_COOKIE_NAME);
     if (previa) await deps.sessions.destroy(previa);
