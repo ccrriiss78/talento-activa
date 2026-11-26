@@ -172,6 +172,10 @@
     "tests/controller/errores-db.test.ts": {
       "sha256": "798adaae04f16dbe21963a739f283ee51e16af51e101f467f4a1d77834340c67",
       "lockedAt": "2026-11-26T09:02:16.702Z"
+    },
+    "tests/controller/app.test.ts": {
+      "sha256": "892b5379212765c0e67bb1e5e9d5274503bd9553e96b5a9a8e837b514e153239",
+      "lockedAt": "2026-11-26T11:02:25.686Z"
     }
   }
 }
