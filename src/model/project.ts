@@ -2,7 +2,7 @@ import type { Db, Queryable } from './db';
 import type { Actor } from './actor';
 import type { AuditLike } from './audit';
 import { DatosNoValidosError } from './password';
-import { FichaNoEncontradaError } from './student-profile';
+import { studentId } from './student-profile';
 
 export class ProyectoNoEncontradoError extends Error {
   constructor() {
@@ -64,12 +64,6 @@ function validar(input: unknown, completo: boolean): Record<string, string | nul
 
 /** Proyectos del alumno autenticado: solo puede ver y tocar los suyos. */
 export function createProjectModel(db: Db, audit: AuditLike) {
-  const studentId = async (q: Queryable, actor: Actor): Promise<string> => {
-    if (actor.rol !== 'ALUMNO') throw new FichaNoEncontradaError();
-    const s = (await q.query<{ id: string }>('select id from "Student" where user_id = $1', [actor.id]))[0];
-    if (!s) throw new FichaNoEncontradaError();
-    return s.id;
-  };
   const propio = async (q: Queryable, id: string, sid: string) => {
     const p = (await q.query<Proyecto>(`select ${COLUMNAS} from "Project" where id = $1 and student_id = $2`, [id, sid]))[0];
     if (!p) throw new ProyectoNoEncontradoError();

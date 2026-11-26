@@ -2,13 +2,10 @@ import type { Db, Queryable } from './db';
 import type { Actor } from './actor';
 import type { AuditLike } from './audit';
 import { DatosNoValidosError } from './password';
-import { CAMPOS_PRIVACIDAD, FichaNoEncontradaError, type Ficha } from './student-profile';
+import { CAMPOS_PRIVACIDAD, COLUMNAS, FichaNoEncontradaError, type Ficha } from './student-profile';
 
 export type EstadoAlumno = 'activo' | 'inactivo';
 const ESTADOS: readonly string[] = ['activo', 'inactivo'];
-
-const COLUMNAS =
-  'id, user_id, edition_id, nombre, foto_url, bio, ubicacion, disponibilidad_traslado, modalidad, estado_laboral, cv_url, linkedin, github, estado, privacy, filled_at';
 
 export function createStudentStatusModel(db: Db, audit: AuditLike) {
   return {

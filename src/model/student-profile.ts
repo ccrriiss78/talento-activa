@@ -37,8 +37,16 @@ export type CambiosFicha = Partial<
   >
 >;
 
-const COLUMNAS =
+export const COLUMNAS =
   'id, user_id, edition_id, nombre, foto_url, bio, ubicacion, disponibilidad_traslado, modalidad, estado_laboral, cv_url, linkedin, github, estado, privacy, filled_at';
+
+/** Resuelve "Actor ALUMNO → student.id"; cualquier otro caso es "no encontrada". */
+export async function studentId(q: Queryable, actor: Actor): Promise<string> {
+  if (actor.rol !== 'ALUMNO') throw new FichaNoEncontradaError();
+  const s = (await q.query<{ id: string }>('select id from "Student" where user_id = $1', [actor.id]))[0];
+  if (!s) throw new FichaNoEncontradaError();
+  return s.id;
+}
 
 /** Campos de la ficha cuya visibilidad controla `privacy` (el nombre siempre es visible). */
 export const CAMPOS_PRIVACIDAD = [

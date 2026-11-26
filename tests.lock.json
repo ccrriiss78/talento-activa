@@ -180,6 +180,10 @@
     "tests/model/email-verification-previos.test.ts": {
       "sha256": "c8f7a527d10c87550a1c2b862a0f65f9a4da6bc53efbfa7c536a8c190551f993",
       "lockedAt": "2026-11-26T12:02:15.629Z"
+    },
+    "tests/model/session-transaction.test.ts": {
+      "sha256": "3476542afd6767982be383ed5bcbbecb88793d8041fbc346224f1c03da15a77b",
+      "lockedAt": "2026-11-26T13:02:49.793Z"
     }
   }
 }

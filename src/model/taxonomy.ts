@@ -2,7 +2,7 @@ import type { Db, Queryable } from './db';
 import type { Actor } from './actor';
 import type { AuditLike } from './audit';
 import { DatosNoValidosError } from './password';
-import { FichaNoEncontradaError } from './student-profile';
+import { studentId } from './student-profile';
 
 export class ElementoNoEncontradoError extends Error {
   constructor() {
@@ -30,12 +30,6 @@ const KINDS = {
 export function createTaxonomyModel(db: Db, audit: AuditLike, kind: TaxonomyKind) {
   const { tabla, rel, col, niveles } = KINDS[kind];
 
-  const studentId = async (q: Queryable, actor: Actor): Promise<string> => {
-    if (actor.rol !== 'ALUMNO') throw new FichaNoEncontradaError();
-    const s = (await q.query<{ id: string }>('select id from "Student" where user_id = $1', [actor.id]))[0];
-    if (!s) throw new FichaNoEncontradaError();
-    return s.id;
-  };
   const existente = async (q: Queryable, id: string) => {
     const e = (await q.query<ElementoCatalogo>(`select id, nombre from "${tabla}" where id = $1`, [id]))[0];
     if (!e) throw new ElementoNoEncontradoError();
