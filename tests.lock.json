@@ -148,6 +148,10 @@
     "tests/controller/composicion-students.test.ts": {
       "sha256": "9a675c1cfa52c26a344a81e2681cea0fcd47023954cf0e0d44c253f54e3af89a",
       "lockedAt": "2026-11-26T05:02:31.407Z"
+    },
+    "tests/model/audit-hallazgo2-3.test.ts": {
+      "sha256": "891543a2cb182465ea93ef28e8ce8c38501ecd056e2951f9fd50ca7e0ebff104",
+      "lockedAt": "2026-11-26T06:02:23.553Z"
     }
   }
 }

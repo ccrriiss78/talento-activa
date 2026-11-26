@@ -29,10 +29,22 @@ export function createEmailVerificationModel(db: Db, options: EmailVerificationO
     async issue(userId: string): Promise<{ token: string; expiresAt: Date }> {
       const token = randomBytes(32).toString('base64url');
       const expiresAt = new Date(now().getTime() + VERIFICATION_HOURS * HOUR_MS);
-      await db.query(
-        `insert into "Email_verification_token" (user_id, token_sha256, expires_at) values ($1, $2, $3)`,
-        [userId, sha256Hex(token), expiresAt],
-      );
+      await db.transaction(async (tx) => {
+        const rows = await tx.query<{ id: string }>(
+          `insert into "Email_verification_token" (user_id, token_sha256, expires_at) values ($1, $2, $3) returning id`,
+          [userId, sha256Hex(token), expiresAt],
+        );
+        await audit?.record(
+          {
+            actor: { id: userId },
+            tabla: 'Email_verification_token',
+            idRegistro: rows?.[0]?.id ?? null,
+            operacion: 'INSERT',
+            datosNuevos: { user_id: userId, expires_at: expiresAt },
+          },
+          tx,
+        );
+      });
       return { token, expiresAt };
     },
 
@@ -40,10 +52,10 @@ export function createEmailVerificationModel(db: Db, options: EmailVerificationO
     async verify(token: string): Promise<string> {
       if (typeof token !== 'string' || !TOKEN_RE.test(token)) throw new TokenVerificacionNoValidoError();
       return db.transaction(async (tx) => {
-        const rows = await tx.query<{ user_id: string }>(
+        const rows = await tx.query<{ id: string; user_id: string }>(
           `update "Email_verification_token" set used_at = $2
            where token_sha256 = $1 and used_at is null and expires_at > $2
-           returning user_id`,
+           returning id, user_id`,
           [sha256Hex(token), now()],
         );
         const userId = rows[0]?.user_id;
@@ -57,6 +69,17 @@ export function createEmailVerificationModel(db: Db, options: EmailVerificationO
             operacion: 'UPDATE',
             datosAnteriores: { email_verified: false },
             datosNuevos: { email_verified: true },
+          },
+          tx,
+        );
+        await audit?.record(
+          {
+            actor: { id: userId },
+            tabla: 'Email_verification_token',
+            idRegistro: rows[0]!.id ?? null,
+            operacion: 'UPDATE',
+            datosAnteriores: { user_id: userId, used_at: null },
+            datosNuevos: { user_id: userId, used_at: now() },
           },
           tx,
         );

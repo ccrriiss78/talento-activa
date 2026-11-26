@@ -56,6 +56,16 @@ export function createCompanyModel(db: Db, audit: AuditLike, users: UsersLike) {
         )[0]!;
         await tx.query(`insert into "Company_user_rel" (company_id, user_id) values ($1, $2)`, [c.id, user.id]);
         await audit.record({ actor, tabla: 'Company', idRegistro: c.id, operacion: 'INSERT', datosNuevos: c }, tx);
+        await audit.record(
+          {
+            actor,
+            tabla: 'Company_user_rel',
+            idRegistro: null,
+            operacion: 'INSERT',
+            datosNuevos: { company_id: c.id, user_id: user.id },
+          },
+          tx,
+        );
         return c;
       });
     },

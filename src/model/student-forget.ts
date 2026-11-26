@@ -34,6 +34,13 @@ export function createStudentForgetModel(db: Db, audit: AuditLike) {
            where (tabla = 'Student' and id_registro = $1) or (tabla = 'User' and id_registro = $2)`,
           [s.id, s.user_id],
         );
+        // Datos hijos (título, URLs, niveles...) auditados antes: referencian al alumno en datos_* (student_id).
+        await tx.query(
+          `update "Audit_log" set datos_anteriores = null, datos_nuevos = null
+           where tabla in ('Project', 'Skill_student_rel', 'Language_student_rel', 'Company_student_rel', 'Reminder_state')
+           and (datos_nuevos->>'student_id' = $1 or datos_anteriores->>'student_id' = $1)`,
+          [s.id],
+        );
         await audit.record(
           { actor, tabla: 'Student', idRegistro: s.id, operacion: 'DELETE', datosAnteriores: { id: s.id, user_id: s.user_id } },
           tx,
