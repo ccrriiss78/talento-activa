@@ -44,6 +44,26 @@ export function createEmailVerificationModel(db: Db, options: EmailVerificationO
           },
           tx,
         );
+        const nuevoId = rows?.[0]?.id ?? null;
+        const previos = await tx.query<{ id: string }>(
+          `update "Email_verification_token" set used_at = $2
+           where user_id = $1 and used_at is null and id <> $3
+           returning id`,
+          [userId, now(), nuevoId],
+        );
+        for (const previo of previos ?? []) {
+          await audit?.record(
+            {
+              actor: { id: userId },
+              tabla: 'Email_verification_token',
+              idRegistro: previo.id,
+              operacion: 'UPDATE',
+              datosAnteriores: { user_id: userId, used_at: null },
+              datosNuevos: { user_id: userId, used_at: now() },
+            },
+            tx,
+          );
+        }
       });
       return { token, expiresAt };
     },

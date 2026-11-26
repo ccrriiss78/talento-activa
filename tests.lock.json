@@ -176,6 +176,10 @@
     "tests/controller/app.test.ts": {
       "sha256": "892b5379212765c0e67bb1e5e9d5274503bd9553e96b5a9a8e837b514e153239",
       "lockedAt": "2026-11-26T11:02:25.686Z"
+    },
+    "tests/model/email-verification-previos.test.ts": {
+      "sha256": "c8f7a527d10c87550a1c2b862a0f65f9a4da6bc53efbfa7c536a8c190551f993",
+      "lockedAt": "2026-11-26T12:02:15.629Z"
     }
   }
 }
