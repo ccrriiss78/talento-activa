@@ -44,13 +44,13 @@ export function createStudentStatusModel(db: Db, audit: AuditLike) {
     },
 
     /**
-     * Vista de un alumno para una empresa (SOCIO): solo activos y solo los campos con
+     * Vista de un alumno para una empresa (SOCIO): solo activos con consentimiento (`consent_at`) y solo los campos con
      * `privacy[campo] === true` (privado por defecto). Un inactivo es "no encontrado".
      */
     async getForCompany(actor: Actor, studentId: string): Promise<Record<string, unknown>> {
       if (actor.rol !== 'SOCIO') throw new FichaNoEncontradaError();
       const f = (
-        await db.query<Ficha>(`select ${COLUMNAS} from "Student" where id = $1 and estado = 'activo'`, [studentId])
+        await db.query<Ficha>(`select ${COLUMNAS} from "Student" where id = $1 and estado = 'activo' and consent_at is not null`, [studentId])
       )[0];
       if (!f) throw new FichaNoEncontradaError();
       const vista: Record<string, unknown> = { id: f.id, edition_id: f.edition_id, nombre: f.nombre };

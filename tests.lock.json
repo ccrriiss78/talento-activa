@@ -152,6 +152,14 @@
     "tests/model/audit-hallazgo2-3.test.ts": {
       "sha256": "891543a2cb182465ea93ef28e8ce8c38501ecd056e2951f9fd50ca7e0ebff104",
       "lockedAt": "2026-11-26T06:02:23.553Z"
+    },
+    "tests/model/student-consent.test.ts": {
+      "sha256": "dcf4e41b9078463837602b2bb4dc4a71af09b54924cd12b817d7aacda7baffc2",
+      "lockedAt": "2026-11-26T07:02:45.645Z"
+    },
+    "tests/controller/student-consent.test.ts": {
+      "sha256": "b10eb3dc98d1299862c44da05aa823d3c6bdc91ae69851e3d4516c586b28165f",
+      "lockedAt": "2026-11-26T07:02:45.646Z"
     }
   }
 }
