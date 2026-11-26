@@ -40,8 +40,13 @@ const COLUMNAS = 'id, nombre, anio, fecha_inicio, fecha_fin, estado';
 const CAMPOS = ['nombre', 'anio', 'fecha_inicio', 'fecha_fin'] as const;
 const FECHA_RE = /^\d{4}-\d{2}-\d{2}$/;
 
-const fechaValida = (v: unknown) =>
-  v === null || (typeof v === 'string' && FECHA_RE.test(v) && !Number.isNaN(Date.parse(v)));
+/** Fecha real: la reconstruida desde la cadena debe coincidir (rechaza 2026-02-30, mes 13…). */
+const fechaValida = (v: unknown) => {
+  if (v === null) return true;
+  if (typeof v !== 'string' || !FECHA_RE.test(v)) return false;
+  const d = new Date(`${v}T00:00:00Z`);
+  return !Number.isNaN(d.getTime()) && d.toISOString().slice(0, 10) === v;
+};
 
 /** Valida los campos presentes; devuelve el subconjunto limpio. */
 function validar(input: CambiosEdicion): CambiosEdicion {

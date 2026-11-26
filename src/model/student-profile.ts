@@ -50,8 +50,8 @@ export const CAMPOS_PRIVACIDAD = [
   'estado_laboral', 'cv_url', 'linkedin', 'github',
 ] as const;
 
-const TEXTO_LIBRE = ['foto_url', 'bio', 'ubicacion', 'cv_url'] as const;
-const ENLACES = ['linkedin', 'github'] as const;
+const TEXTO_LIBRE = ['bio', 'ubicacion'] as const;
+const ENLACES = ['foto_url', 'cv_url', 'linkedin', 'github'] as const;
 const MODALIDADES = ['remoto', 'presencial', 'hibrido'];
 const ESTADOS_LABORALES = ['buscando', 'trabajando'];
 

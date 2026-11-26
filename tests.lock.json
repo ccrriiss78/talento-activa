@@ -160,6 +160,14 @@
     "tests/controller/student-consent.test.ts": {
       "sha256": "b10eb3dc98d1299862c44da05aa823d3c6bdc91ae69851e3d4516c586b28165f",
       "lockedAt": "2026-11-26T07:02:45.646Z"
+    },
+    "tests/model/student-profile-urls.test.ts": {
+      "sha256": "f281e1b214aa18dfce2859266bba0558ab310f5118bccdeeeddaa71995831f5f",
+      "lockedAt": "2026-11-26T08:02:24.898Z"
+    },
+    "tests/model/edition-fechas.test.ts": {
+      "sha256": "62022a1e8035be859de60465e6c9af366d47dee6dd993f4f23e5a594f3564b10",
+      "lockedAt": "2026-11-26T08:02:24.898Z"
     }
   }
 }
