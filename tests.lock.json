@@ -144,6 +144,10 @@
     "tests/controller/taxonomy.test.ts": {
       "sha256": "0e8f93cfbe4da1d52010c469c4a5d08b485893ed90f6dcb0832ea3301e996929",
       "lockedAt": "2026-11-25T19:03:04.109Z"
+    },
+    "tests/controller/composicion-students.test.ts": {
+      "sha256": "9a675c1cfa52c26a344a81e2681cea0fcd47023954cf0e0d44c253f54e3af89a",
+      "lockedAt": "2026-11-26T05:02:31.407Z"
     }
   }
 }

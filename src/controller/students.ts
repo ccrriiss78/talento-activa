@@ -13,9 +13,8 @@ export interface StudentRoutesDeps extends AuthMiddlewareDeps {
 /** Rutas de alumnos (montar bajo /api/students). Alta solo ADMIN. */
 export function createStudentRoutes(deps: StudentRoutesDeps) {
   const app = new Hono();
-  app.use('*', createAuthMiddleware(deps, ['ADMIN']));
-
-  app.post('/', async (c) => {
+  // Middleware por ruta (no `use('*')`): este prefijo lo comparten otros routers con otros roles.
+  app.post('/', createAuthMiddleware(deps, ['ADMIN']), async (c) => {
     const b = await c.req.json().catch(() => null);
     if (
       !b ||
