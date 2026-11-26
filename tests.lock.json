@@ -184,6 +184,10 @@
     "tests/model/session-transaction.test.ts": {
       "sha256": "3476542afd6767982be383ed5bcbbecb88793d8041fbc346224f1c03da15a77b",
       "lockedAt": "2026-11-26T13:02:49.793Z"
+    },
+    "tests/controller/envio-verificacion.test.ts": {
+      "sha256": "7e5764f4d6a59074bd6cd3a2b65a3755a8349d226d0c98622c8fd3c466af7bb7",
+      "lockedAt": "2026-11-26T14:02:40.117Z"
     }
   }
 }

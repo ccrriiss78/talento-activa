@@ -4,9 +4,11 @@ import type { Company, NuevaEmpresa } from '../model/company';
 import { EmpresaNoEncontradaError } from '../model/company';
 import { DatosNoValidosError } from '../model/password';
 import { EmailYaRegistradoError } from '../model/user';
+import { notificarVerificacion, type VerificationNotifyDeps } from './verification-notify';
 import { createAuthMiddleware, getActor, type AuthMiddlewareDeps } from './authorization';
 
-export interface CompanyRoutesDeps extends AuthMiddlewareDeps {
+export interface CompanyRoutesDeps extends AuthMiddlewareDeps, VerificationNotifyDeps {
+  users?: { findByEmail(email: string): Promise<{ id: string; email: string } | null> };
   companies: {
     create(actor: Actor, input: NuevaEmpresa): Promise<Company>;
     setSocia(actor: Actor, id: string, esSocia: boolean): Promise<Company>;
@@ -33,7 +35,11 @@ export function createCompanyRoutes(deps: CompanyRoutesDeps) {
     if (b.es_socia !== undefined) input.es_socia = b.es_socia;
     if (b.contacto !== undefined) input.contacto = b.contacto;
     try {
-      return c.json(await deps.companies.create(getActor(c), input), 201);
+      const empresa = await deps.companies.create(getActor(c), input);
+      // Company no expone el id del usuario SOCIO: se resuelve por email.
+      const usuario = deps.verificationSender ? await deps.users?.findByEmail(input.email).catch(() => null) : null;
+      await notificarVerificacion(deps, usuario ?? null);
+      return c.json(empresa, 201);
     } catch (e) {
       if (e instanceof DatosNoValidosError) return c.json({ error: 'Datos no válidos' }, 400);
       if (e instanceof EmailYaRegistradoError) return c.json({ error: e.message }, 409);

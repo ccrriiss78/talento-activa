@@ -4,9 +4,10 @@ import { EdicionNoEncontradaError } from '../model/edition';
 import { DatosNoValidosError } from '../model/password';
 import type { NuevoAlumno, Student } from '../model/student';
 import { EmailYaRegistradoError } from '../model/user';
+import { notificarVerificacion, type VerificationNotifyDeps } from './verification-notify';
 import { createAuthMiddleware, getActor, type AuthMiddlewareDeps } from './authorization';
 
-export interface StudentRoutesDeps extends AuthMiddlewareDeps {
+export interface StudentRoutesDeps extends AuthMiddlewareDeps, VerificationNotifyDeps {
   students: { create(actor: Actor, input: NuevoAlumno): Promise<Student> };
 }
 
@@ -33,7 +34,9 @@ export function createStudentRoutes(deps: StudentRoutesDeps) {
       nombre: b.nombre,
     };
     try {
-      return c.json(await deps.students.create(getActor(c), input), 201);
+      const alumno = await deps.students.create(getActor(c), input);
+      await notificarVerificacion(deps, { id: alumno.user_id, email: input.email });
+      return c.json(alumno, 201);
     } catch (e) {
       if (e instanceof DatosNoValidosError) return c.json({ error: 'Datos no válidos' }, 400);
       if (e instanceof EdicionNoEncontradaError) return c.json({ error: e.message }, 404);

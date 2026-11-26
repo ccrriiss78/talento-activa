@@ -2,9 +2,10 @@ import { Hono } from 'hono';
 import type { Actor } from '../model/actor';
 import { DatosNoValidosError } from '../model/password';
 import { EmailYaRegistradoError, toPublic, type NuevoUsuario, type UserPublic } from '../model/user';
+import { notificarVerificacion, type VerificationNotifyDeps } from './verification-notify';
 import { createAuthMiddleware, getActor, type AuthMiddlewareDeps } from './authorization';
 
-export interface RegisterDeps extends AuthMiddlewareDeps {
+export interface RegisterDeps extends AuthMiddlewareDeps, VerificationNotifyDeps {
   users: { createUser(actor: Actor, input: NuevoUsuario): Promise<UserPublic> };
 }
 
@@ -24,6 +25,7 @@ export function createRegisterRoutes(deps: RegisterDeps) {
     const input: NuevoUsuario = { email: body.email, password: body.password, rol: body.rol };
     try {
       const user = await deps.users.createUser(getActor(c), input);
+      await notificarVerificacion(deps, user);
       return c.json(toPublic(user), 201);
     } catch (e) {
       if (e instanceof EmailYaRegistradoError) return c.json({ error: e.message }, 409);
