@@ -1,11 +1,7 @@
 import type { Db, Queryable } from './db';
 import type { Actor } from './actor';
-import type { AuditEntry } from './audit';
+import type { AuditLike } from './audit';
 import { FichaNoEncontradaError } from './student-profile';
-
-interface AuditLike {
-  record(entry: AuditEntry, executor?: Queryable): Promise<void>;
-}
 
 export interface ConsentimientoAlumno {
   id: string;

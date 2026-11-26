@@ -1,6 +1,6 @@
 import type { Db, Queryable } from './db';
 import type { Actor } from './actor';
-import type { AuditEntry } from './audit';
+import type { AuditLike } from './audit';
 import { DatosNoValidosError } from './password';
 import { FichaNoEncontradaError } from './student-profile';
 
@@ -22,10 +22,6 @@ export interface Proyecto {
 }
 
 export type DatosProyecto = Partial<Pick<Proyecto, 'titulo' | 'descripcion' | 'url' | 'thumbnail_url'>>;
-
-interface AuditLike {
-  record(entry: AuditEntry, executor?: Queryable): Promise<void>;
-}
 
 const COLUMNAS = 'id, student_id, titulo, descripcion, url, thumbnail_url, created_at';
 const esTexto = (v: unknown): v is string => typeof v === 'string';

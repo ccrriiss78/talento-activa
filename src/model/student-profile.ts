@@ -1,6 +1,6 @@
 import type { Db, Queryable } from './db';
 import type { Actor } from './actor';
-import type { AuditEntry } from './audit';
+import type { AuditLike } from './audit';
 import { DatosNoValidosError } from './password';
 
 export class FichaNoEncontradaError extends Error {
@@ -36,10 +36,6 @@ export type CambiosFicha = Partial<
     | 'modalidad' | 'estado_laboral' | 'cv_url' | 'linkedin' | 'github' | 'privacy'
   >
 >;
-
-interface AuditLike {
-  record(entry: AuditEntry, executor?: Queryable): Promise<void>;
-}
 
 const COLUMNAS =
   'id, user_id, edition_id, nombre, foto_url, bio, ubicacion, disponibilidad_traslado, modalidad, estado_laboral, cv_url, linkedin, github, estado, privacy, filled_at';

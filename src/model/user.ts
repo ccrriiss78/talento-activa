@@ -1,6 +1,6 @@
 import type { Db, Queryable } from './db';
 import type { Actor, Rol } from './actor';
-import type { AuditEntry } from './audit';
+import type { AuditEntry, AuditLike } from './audit';
 import { hashPassword, DatosNoValidosError } from './password';
 
 export interface UserPublic {
@@ -18,10 +18,6 @@ export interface NuevoUsuario {
   password: string;
   rol: Rol;
 }
-interface AuditLike {
-  record(entry: AuditEntry, executor?: Queryable): Promise<void>;
-}
-
 /** Proyección pública de un usuario (nunca incluye password_hash). */
 export function toPublic(u: UserPublic): UserPublic {
   return { id: u.id, email: u.email, rol: u.rol, email_verified: u.email_verified, created_at: u.created_at };

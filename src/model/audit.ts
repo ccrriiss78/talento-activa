@@ -32,6 +32,11 @@ function sanitize(value: unknown): unknown {
 const toJson = (value: unknown): string | null =>
   value === undefined || value === null ? null : JSON.stringify(sanitize(value));
 
+/** Contrato mínimo que los modelos necesitan del auditor. */
+export interface AuditLike {
+  record(entry: AuditEntry, executor?: Queryable): Promise<void>;
+}
+
 export function createAudit(db: Db) {
   return {
     async record(entry: AuditEntry, executor: Queryable = db): Promise<void> {

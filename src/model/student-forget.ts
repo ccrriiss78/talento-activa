@@ -1,11 +1,7 @@
 import type { Db, Queryable } from './db';
 import type { Actor } from './actor';
-import type { AuditEntry } from './audit';
+import type { AuditLike } from './audit';
 import { FichaNoEncontradaError } from './student-profile';
-
-interface AuditLike {
-  record(entry: AuditEntry, executor?: Queryable): Promise<void>;
-}
 
 /** Tablas hijas del alumno que se borran explícitamente (además del ON DELETE CASCADE). */
 const HIJAS = ['Project', 'Skill_student_rel', 'Language_student_rel', 'Company_student_rel', 'Reminder_state'];

@@ -1,6 +1,6 @@
 import type { Db, Queryable } from './db';
 import type { Actor } from './actor';
-import type { AuditEntry } from './audit';
+import type { AuditLike } from './audit';
 import { DatosNoValidosError } from './password';
 
 export interface Edition {
@@ -18,10 +18,6 @@ export interface NuevaEdicion {
   fecha_fin?: string | null;
 }
 export type CambiosEdicion = Partial<NuevaEdicion>;
-
-interface AuditLike {
-  record(entry: AuditEntry, executor?: Queryable): Promise<void>;
-}
 
 export class EdicionNoEncontradaError extends Error {
   constructor() {

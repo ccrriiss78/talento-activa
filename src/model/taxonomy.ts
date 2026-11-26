@@ -1,6 +1,6 @@
 import type { Db, Queryable } from './db';
 import type { Actor } from './actor';
-import type { AuditEntry } from './audit';
+import type { AuditLike } from './audit';
 import { DatosNoValidosError } from './password';
 import { FichaNoEncontradaError } from './student-profile';
 
@@ -19,10 +19,6 @@ export interface ElementoCatalogo {
 }
 export interface ElementoAlumno extends ElementoCatalogo {
   nivel: string | null;
-}
-
-interface AuditLike {
-  record(entry: AuditEntry, executor?: Queryable): Promise<void>;
 }
 
 const KINDS = {

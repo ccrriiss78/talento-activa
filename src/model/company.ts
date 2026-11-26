@@ -1,6 +1,6 @@
 import type { Db, Queryable } from './db';
 import type { Actor } from './actor';
-import type { AuditEntry } from './audit';
+import type { AuditLike } from './audit';
 import { DatosNoValidosError } from './password';
 import type { NuevoUsuario, UserPublic } from './user';
 
@@ -19,9 +19,6 @@ export interface NuevaEmpresa {
   contacto?: string;
 }
 
-interface AuditLike {
-  record(entry: AuditEntry, executor?: Queryable): Promise<void>;
-}
 interface UsersLike {
   createUser(actor: Actor, input: NuevoUsuario, executor?: Queryable): Promise<UserPublic>;
 }
