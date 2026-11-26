@@ -168,6 +168,10 @@
     "tests/model/edition-fechas.test.ts": {
       "sha256": "62022a1e8035be859de60465e6c9af366d47dee6dd993f4f23e5a594f3564b10",
       "lockedAt": "2026-11-26T08:02:24.898Z"
+    },
+    "tests/controller/errores-db.test.ts": {
+      "sha256": "798adaae04f16dbe21963a739f283ee51e16af51e101f467f4a1d77834340c67",
+      "lockedAt": "2026-11-26T09:02:16.702Z"
     }
   }
 }
