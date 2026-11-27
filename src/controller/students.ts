@@ -38,7 +38,8 @@ export function createStudentRoutes(deps: StudentRoutesDeps) {
       await notificarVerificacion(deps, { id: alumno.user_id, email: input.email });
       return c.json(alumno, 201);
     } catch (e) {
-      if (e instanceof DatosNoValidosError) return c.json({ error: 'Datos no válidos' }, 400);
+      // 22P02: Postgres rechaza un uuid mal formado del body (edition_id) → dato no válido, no 404.
+      if (e instanceof DatosNoValidosError || (e as { code?: string }).code === '22P02') return c.json({ error: 'Datos no válidos' }, 400);
       if (e instanceof EdicionNoEncontradaError) return c.json({ error: e.message }, 404);
       if (e instanceof EmailYaRegistradoError) return c.json({ error: e.message }, 409);
       throw e;

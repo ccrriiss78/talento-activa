@@ -188,6 +188,10 @@
     "tests/controller/envio-verificacion.test.ts": {
       "sha256": "7e5764f4d6a59074bd6cd3a2b65a3755a8349d226d0c98622c8fd3c466af7bb7",
       "lockedAt": "2026-11-26T14:02:40.117Z"
+    },
+    "tests/controller/students-body-uuid.test.ts": {
+      "sha256": "89d21df0e5401d726e7ce74cf8be952f1c40da07ab4536c25cc001d19bdec68e",
+      "lockedAt": "2026-11-27T06:02:14.164Z"
     }
   }
 }
