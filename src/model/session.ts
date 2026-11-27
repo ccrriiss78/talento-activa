@@ -1,7 +1,7 @@
 import { createHash, randomBytes } from 'node:crypto';
 import type { Db, Queryable } from './db';
 import type { Actor, Rol } from './actor';
-import type { AuditEntry } from './audit';
+import type { AuditLike } from './audit';
 
 export const SESSION_DAYS = 30;
 export const RENEW_THRESHOLD_DAYS = 15;
@@ -17,7 +17,7 @@ export interface SessionResolved {
 export interface SessionOptions {
   now?: () => Date;
   /** Capa de auditoría: cada mutación de Session se registra (sin token ni hash). */
-  audit?: { record(entry: AuditEntry, executor?: Queryable): Promise<void> };
+  audit?: AuditLike;
 }
 
 const sha256Hex = (token: string) => createHash('sha256').update(token).digest('hex');

@@ -1,6 +1,6 @@
 import { createHash, randomBytes } from 'node:crypto';
-import type { Db, Queryable } from './db';
-import type { AuditEntry } from './audit';
+import type { Db } from './db';
+import type { AuditLike } from './audit';
 
 export const VERIFICATION_HOURS = 48;
 const HOUR_MS = 3_600_000;
@@ -15,7 +15,7 @@ export class TokenVerificacionNoValidoError extends Error {
 
 export interface EmailVerificationOptions {
   now?: () => Date;
-  audit?: { record(entry: AuditEntry, executor?: Queryable): Promise<void> };
+  audit?: AuditLike;
 }
 
 const sha256Hex = (token: string) => createHash('sha256').update(token).digest('hex');
