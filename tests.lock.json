@@ -192,6 +192,10 @@
     "tests/controller/students-body-uuid.test.ts": {
       "sha256": "89d21df0e5401d726e7ce74cf8be952f1c40da07ab4536c25cc001d19bdec68e",
       "lockedAt": "2026-11-27T06:02:14.164Z"
+    },
+    "tests/controller/verification-notify-log.test.ts": {
+      "sha256": "3e567757808075a512a8a6303e3f9c5465f53bd54b40d7ebc615ec01402b4a14",
+      "lockedAt": "2026-11-27T07:02:21.680Z"
     }
   }
 }

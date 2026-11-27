@@ -5,7 +5,7 @@ export interface VerificationNotifyDeps {
 
 /**
  * Envía el enlace de verificación a una cuenta recién creada. La cuenta ya existe, así que un
- * fallo del proveedor de email no debe convertir el alta en error: se traga y el admin puede reenviar.
+ * fallo del proveedor de email no debe convertir el alta en error: se registra un aviso genérico y el alta sigue adelante.
  */
 export async function notificarVerificacion(
   deps: VerificationNotifyDeps,
@@ -15,6 +15,7 @@ export async function notificarVerificacion(
   try {
     await deps.verificationSender.sendTo({ id: user.id, email: user.email });
   } catch {
-    // intencionadamente silencioso: no filtramos detalles del proveedor
+    // Log genérico: solo el id de usuario, sin email, token ni detalles del proveedor.
+    console.warn(`No se pudo enviar el email de verificación (user_id=${user.id})`);
   }
 }
