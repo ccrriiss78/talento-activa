@@ -37,8 +37,16 @@ export function createCompanyRoutes(deps: CompanyRoutesDeps) {
     try {
       const empresa = await deps.companies.create(getActor(c), input);
       // Company no expone el id del usuario SOCIO: se resuelve por email.
-      const usuario = deps.verificationSender ? await deps.users?.findByEmail(input.email).catch(() => null) : null;
-      await notificarVerificacion(deps, usuario ?? null);
+      let usuario: { id: string; email: string } | null = null;
+      if (deps.verificationSender) {
+        try {
+          usuario = (await deps.users?.findByEmail(input.email)) ?? null;
+        } catch {
+          // Log genérico: sin email ni detalles del error. El alta ya se hizo; solo falla el aviso.
+          console.warn('No se pudo localizar al usuario SOCIO para enviar la verificación (empresa_id=' + empresa.id + ')');
+        }
+      }
+      await notificarVerificacion(deps, usuario);
       return c.json(empresa, 201);
     } catch (e) {
       if (e instanceof DatosNoValidosError) return c.json({ error: 'Datos no válidos' }, 400);

@@ -196,6 +196,10 @@
     "tests/controller/verification-notify-log.test.ts": {
       "sha256": "3e567757808075a512a8a6303e3f9c5465f53bd54b40d7ebc615ec01402b4a14",
       "lockedAt": "2026-11-27T07:02:21.680Z"
+    },
+    "tests/controller/companies-lookup-log.test.ts": {
+      "sha256": "8b01bd215cf757af48b1cb3d04826a393b3c3f09538cb6b7121636d6b3458ffb",
+      "lockedAt": "2026-11-28T05:02:10.764Z"
     }
   }
 }
